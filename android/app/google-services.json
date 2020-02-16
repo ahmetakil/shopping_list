@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "790451969584",
+    "firebase_url": "https://shoppinglist-fdb33.firebaseio.com",
+    "project_id": "shoppinglist-fdb33",
+    "storage_bucket": "shoppinglist-fdb33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790451969584:android:979553fcedece9c1c517f5",
+        "android_client_info": {
+          "package_name": "me.ahmetakil.shopping_list"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790451969584-tf1b35i9vcq7ckd9fku5kmm9ptpeh1on.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1Web6hgpH8-CvvHtkJ_rG1hCGhP6SVvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790451969584-tf1b35i9vcq7ckd9fku5kmm9ptpeh1on.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
