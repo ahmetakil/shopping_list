@@ -170,16 +170,14 @@ PODS:
     - Flutter
   - cloud_firestore_web (0.1.0):
     - Flutter
-  - Firebase/Analytics (6.16.0):
-    - Firebase/Core
-  - Firebase/Core (6.16.0):
+  - Firebase/Core (6.17.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.2.2)
-  - Firebase/CoreOnly (6.16.0):
-    - FirebaseCore (= 6.6.1)
-  - Firebase/Firestore (6.16.0):
+  - Firebase/CoreOnly (6.17.0):
+    - FirebaseCore (= 6.6.2)
+  - Firebase/Firestore (6.17.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 1.10.0)
+    - FirebaseFirestore (~> 1.10.2)
   - firebase_core (0.0.1):
     - Firebase/Core
     - Flutter
@@ -195,7 +193,7 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (6.6.1):
+  - FirebaseCore (6.6.2):
     - FirebaseCoreDiagnostics (~> 1.2)
     - FirebaseCoreDiagnosticsInterop (~> 1.2)
     - GoogleUtilities/Environment (~> 6.5)
@@ -207,7 +205,7 @@ PODS:
     - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseFirestore (1.10.0):
+  - FirebaseFirestore (1.10.2):
     - abseil/algorithm (= 0.20190808)
     - abseil/base (= 0.20190808)
     - abseil/memory (= 0.20190808)
@@ -224,7 +222,7 @@ PODS:
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstanceID (4.3.0):
+  - FirebaseInstanceID (4.3.1):
     - FirebaseCore (~> 6.6)
     - FirebaseInstallations (~> 1.0)
     - GoogleUtilities/Environment (~> 6.5)
@@ -236,9 +234,9 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
-  - GoogleDataTransport (3.3.1)
-  - GoogleDataTransportCCTSupport (1.3.1):
-    - GoogleDataTransport (~> 3.3)
+  - GoogleDataTransport (4.0.0)
+  - GoogleDataTransportCCTSupport (1.4.0):
+    - GoogleDataTransport (~> 4.0)
     - nanopb (~> 0.3.901)
   - GoogleUtilities/AppDelegateSwizzler (6.5.1):
     - GoogleUtilities/Environment
@@ -285,13 +283,13 @@ PODS:
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - cloud_firestore_web (from `.symlinks/plugins/cloud_firestore_web/ios`)
-  - Firebase/Analytics
+  - Firebase/Firestore
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_core_web (from `.symlinks/plugins/firebase_core_web/ios`)
   - Flutter (from `Flutter`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - abseil
     - BoringSSL-GRPC
     - Firebase
@@ -330,21 +328,21 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   cloud_firestore: 3d86e0f8fe22ea61aa45e43dd2226684779a87a3
   cloud_firestore_web: 9ec3dc7f5f98de5129339802d491c1204462bfec
-  Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
+  Firebase: 2672e5636b42f977177716317e68346ae5e9de25
   firebase_core: dc539d4bdc69894823e4a6e557034a9e48960f21
   firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 85064903ed6c28e47fec9c7bd149d94ba1b6b6e7
+  FirebaseCore: a1dd9dd6355a8356dd30a8f076839e242285a81c
   FirebaseCoreDiagnostics: 5e78803ab276bc5b50340e3c539c06c3de35c649
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseFirestore: cee8f861d68dadce998876b78a4b75701bc94302
+  FirebaseFirestore: 2ee644acccde18e49b2fb5d434c709b1f1171b13
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
-  FirebaseInstanceID: 6668efc1655a4052c083f287a7141f1ead12f9c2
+  FirebaseInstanceID: 031d7d0c8e7b5c030bbeb4d2a690550375e83fec
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   GoogleAppMeasurement: d0560d915abf15e692e8538ba1d58442217b6aff
-  GoogleDataTransport: 0048df6388dab1c254799f2a30365b1dffe20422
-  GoogleDataTransportCCTSupport: f880d70972efa2ed1be4e9173a0f4c5f3dc2d176
+  GoogleDataTransport: 47fe3b8e1673e5187dfd615656a3c5034f150d69
+  GoogleDataTransportCCTSupport: 36f69887fd212db6d7ef4dd45ba44523717a434e
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
@@ -352,6 +350,6 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
 
-PODFILE CHECKSUM: 3c278f0558fc9283d214fb02f796a79416dfdb3d
+PODFILE CHECKSUM: 90e29cc624e6261751f12938345012bf73e65cb1
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4

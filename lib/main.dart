@@ -1,18 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_list/models/item.dart';
+import 'package:shopping_list/models/urgency.dart';
+import 'package:shopping_list/provider/urgency_provider.dart';
+
+import 'itemDialog.dart';
+import 'list_item.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider.value(
+      value: UrgencyProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'ShoppingList',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: HomePage(),
       ),
-      home: HomePage(),
     );
   }
 }
@@ -23,8 +33,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _amountController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -37,71 +45,7 @@ class _HomePageState extends State<HomePage> {
           showDialog(
               context: context,
               barrierDismissible: false,
-              builder: (_) => AlertDialog(
-                    title: Text(
-                      "Add Item",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        TextField(
-                          controller: _nameController,
-                          decoration: InputDecoration(
-                            labelText: "Name",
-                          ),
-                          onSubmitted: (_) => FocusScope.of(context).unfocus(),
-                        ),
-                        TextField(
-                          controller: _amountController,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            labelText: "Amount",
-                          ),
-                        ),
-                      ],
-                    ),
-                    actions: <Widget>[
-                      FlatButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text("Cancel"),
-                      ),
-                      FlatButton(
-                        child: Text("Add"),
-                        onPressed: () {
-                          print("NAME CONTROLLER -> $_nameController");
-                          String name = _nameController.text ?? "A";
-                          int amount =
-                              int.tryParse(_amountController.text) ?? -1;
-
-                          if (name == "A" ||
-                              name == "" ||
-                              amount == -1 ||
-                              amount < 1) {
-                            _scaffoldKey.currentState.removeCurrentSnackBar();
-                            _scaffoldKey.currentState.showSnackBar(SnackBar(
-                              content: Text("Lütfen Geçerli Değerler Girin"),
-                              duration: Duration(seconds: 2),
-                            ));
-                            return;
-                          }
-                          Firestore.instance.collection("items").add({
-                            'name': name,
-                            'amount': amount,
-                          }).then((_) {
-                            _nameController.clear();
-                            _amountController.clear();
-                            Navigator.of(context).pop();
-                          });
-                        },
-                      )
-                    ],
-                  ));
+              builder: (_) => ItemDialog(_scaffoldKey));
         },
         child: Icon(Icons.add),
       ),
@@ -121,35 +65,25 @@ class _HomePageState extends State<HomePage> {
                     return Text("Error");
                   }
                   if (!snapshot.hasData) {
-                    return CircularProgressIndicator();
+                    return Center(
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
                   }
                   final documents = snapshot.data.documents;
                   return ListView.builder(
                       itemBuilder: (_, index) {
                         final doc = documents[index];
+                        Item item = Item(name: doc["name"],urgency: UrgencyExtension.fromLabel(doc["urgency"]));
                         return Dismissible(
-                          key: ValueKey("${doc["name"]}-${doc["amount"]}"),
+                          key: ValueKey("${doc["name"]}"),
                           onDismissed: (_) {
                             doc.reference.delete();
                           },
-                          child: Container(
-                            margin:
-                                EdgeInsets.symmetric(vertical: 12, horizontal: 4),
-                            padding: EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.grey)),
-                            child: ListTile(
-                              title: Text(
-                                "${doc["name"]}",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                              leading: CircleAvatar(
-                                child: Text("${doc["amount"]}x"),
-                              ),
-                            ),
-                          ),
+                          child: ListItem(item),
                         );
                       },
                       itemCount: documents.length);
