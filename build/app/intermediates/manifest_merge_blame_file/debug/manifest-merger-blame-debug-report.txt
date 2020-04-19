@@ -1,0 +1,213 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="me.ahmetakil.shopping_list"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="28" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/debug/AndroidManifest.xml:6:5-66
+14-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/debug/AndroidManifest.xml:6:22-64
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:24:5-79
+15-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:24:22-76
+16    <uses-permission android:name="android.permission.WAKE_LOCK" />
+16-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:25:5-68
+16-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:25:22-65
+17    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+17-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:26:5-110
+17-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:26:22-107
+18    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+18-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:26:5-82
+18-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:26:22-79
+19    <!--
+20 io.flutter.app.FlutterApplication is an android.app.Application that
+21         calls FlutterMain.startInitialization(this); in its onCreate method.
+22         In most cases you can leave this as-is, but you if you want to provide
+23         additional functionality it is fine to subclass or reimplement
+24         FlutterApplication and put your custom class here.
+25    -->
+26    <application
+26-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:8:5-29:19
+27        android:name="io.flutter.app.FlutterApplication"
+27-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:9:9-57
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.0.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/c1da7862c7abb8e426855a3f78caf221/core-1.0.0/AndroidManifest.xml:22:18-86
+29        android:debuggable="true"
+30        android:icon="@mipmap/ic_launcher"
+30-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:11:9-43
+31        android:label="shopping_list" >
+31-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:10:9-38
+32        <activity
+32-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:12:9-23:20
+33            android:name="me.ahmetakil.shopping_list.MainActivity"
+33-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:13:13-41
+34            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+34-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:16:13-163
+35            android:hardwareAccelerated="true"
+35-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:17:13-47
+36            android:launchMode="singleTop"
+36-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:14:13-43
+37            android:theme="@style/LaunchTheme"
+37-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:15:13-47
+38            android:windowSoftInputMode="adjustResize" >
+38-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:18:13-55
+39            <intent-filter>
+39-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:19:13-22:29
+40                <action android:name="android.intent.action.MAIN" />
+40-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:20:17-68
+40-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:20:25-66
+41
+42                <category android:name="android.intent.category.LAUNCHER" />
+42-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:21:17-76
+42-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:21:27-74
+43            </intent-filter>
+44        </activity>
+45        <!--
+46             Don't delete the meta-data below.
+47             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+48        -->
+49        <meta-data
+49-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:26:9-28:33
+50            android:name="flutterEmbedding"
+50-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:27:13-44
+51            android:value="2" />
+51-->/Users/deathoftime/flutter_projects/shopping_list/android/app/src/main/AndroidManifest.xml:28:13-30
+52
+53        <service
+53-->[:cloud_firestore] /Users/deathoftime/flutter_projects/shopping_list/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+54            android:name="com.google.firebase.components.ComponentDiscoveryService"
+54-->[:cloud_firestore] /Users/deathoftime/flutter_projects/shopping_list/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:8:18-89
+55            android:directBootAware="true"
+55-->[com.google.firebase:firebase-common:19.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/329f4232192bc410a462f3231b01348b/jetified-firebase-common-19.3.0/AndroidManifest.xml:34:13-43
+56            android:exported="false" >
+56-->[com.google.android.gms:play-services-measurement-api:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/ca912bff2260618b5b638fe661521702/play-services-measurement-api-17.2.2/AndroidManifest.xml:29:13-37
+57            <meta-data
+57-->[:cloud_firestore] /Users/deathoftime/flutter_projects/shopping_list/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+58                android:name="com.google.firebase.components:io.flutter.plugins.firebase.cloudfirestore.FlutterFirebaseAppRegistrar"
+58-->[:cloud_firestore] /Users/deathoftime/flutter_projects/shopping_list/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-133
+59                android:value="com.google.firebase.components.ComponentRegistrar" />
+59-->[:cloud_firestore] /Users/deathoftime/flutter_projects/shopping_list/build/cloud_firestore/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+60            <meta-data
+60-->[:firebase_core] /Users/deathoftime/flutter_projects/shopping_list/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+61                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseAppRegistrar"
+61-->[:firebase_core] /Users/deathoftime/flutter_projects/shopping_list/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-123
+62                android:value="com.google.firebase.components.ComponentRegistrar" />
+62-->[:firebase_core] /Users/deathoftime/flutter_projects/shopping_list/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+63            <meta-data
+63-->[com.google.android.gms:play-services-measurement-api:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/ca912bff2260618b5b638fe661521702/play-services-measurement-api-17.2.2/AndroidManifest.xml:30:13-32:85
+64                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+64-->[com.google.android.gms:play-services-measurement-api:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/ca912bff2260618b5b638fe661521702/play-services-measurement-api-17.2.2/AndroidManifest.xml:31:17-139
+65                android:value="com.google.firebase.components.ComponentRegistrar" />
+65-->[com.google.android.gms:play-services-measurement-api:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/ca912bff2260618b5b638fe661521702/play-services-measurement-api-17.2.2/AndroidManifest.xml:32:17-82
+66            <meta-data
+66-->[com.google.firebase:firebase-firestore:21.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a098c0f34b2c1d45dda0255cbf016d38/jetified-firebase-firestore-21.3.0/AndroidManifest.xml:20:13-22:85
+67                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+67-->[com.google.firebase:firebase-firestore:21.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a098c0f34b2c1d45dda0255cbf016d38/jetified-firebase-firestore-21.3.0/AndroidManifest.xml:21:17-111
+68                android:value="com.google.firebase.components.ComponentRegistrar" />
+68-->[com.google.firebase:firebase-firestore:21.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a098c0f34b2c1d45dda0255cbf016d38/jetified-firebase-firestore-21.3.0/AndroidManifest.xml:22:17-82
+69            <meta-data
+69-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:32:13-34:85
+70                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+70-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:33:17-96
+71                android:value="com.google.firebase.components.ComponentRegistrar" />
+71-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:34:17-82
+72        </service>
+73
+74        <receiver
+74-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:29:9-33:20
+75            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+75-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:30:13-85
+76            android:enabled="true"
+76-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:31:13-35
+77            android:exported="false" >
+77-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:32:13-37
+78        </receiver>
+79        <receiver
+79-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:34:9-42:20
+80            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+80-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:35:13-100
+81            android:enabled="true"
+81-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:36:13-35
+82            android:exported="true"
+82-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:37:13-36
+83            android:permission="android.permission.INSTALL_PACKAGES" >
+83-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:38:13-69
+84            <intent-filter>
+84-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:39:13-41:29
+85                <action android:name="com.android.vending.INSTALL_REFERRER" />
+85-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:40:17-79
+85-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:40:25-76
+86            </intent-filter>
+87        </receiver>
+88
+89        <service
+89-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:44:9-47:40
+90            android:name="com.google.android.gms.measurement.AppMeasurementService"
+90-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:45:13-84
+91            android:enabled="true"
+91-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:46:13-35
+92            android:exported="false" />
+92-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:47:13-37
+93        <service
+93-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:48:9-52:72
+94            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+94-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:49:13-87
+95            android:enabled="true"
+95-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:50:13-35
+96            android:exported="false"
+96-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:51:13-37
+97            android:permission="android.permission.BIND_JOB_SERVICE" />
+97-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/a2d3f38d709f8b9f54c2677fdca8f29a/play-services-measurement-17.2.2/AndroidManifest.xml:52:13-69
+98
+99        <receiver
+99-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:37:9-44:20
+100            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+100-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:38:13-78
+101            android:exported="true"
+101-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:39:13-36
+102            android:permission="com.google.android.c2dm.permission.SEND" >
+102-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:40:13-73
+103            <intent-filter>
+103-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:41:13-43:29
+104                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+104-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:42:17-81
+104-->[com.google.firebase:firebase-iid:20.0.2] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/f26cdfb5f8d69cbc9663543f3ec1de65/firebase-iid-20.0.2/AndroidManifest.xml:42:25-78
+105            </intent-filter>
+106        </receiver>
+107
+108        <provider
+108-->[com.google.firebase:firebase-common:19.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/329f4232192bc410a462f3231b01348b/jetified-firebase-common-19.3.0/AndroidManifest.xml:26:9-30:39
+109            android:name="com.google.firebase.provider.FirebaseInitProvider"
+109-->[com.google.firebase:firebase-common:19.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/329f4232192bc410a462f3231b01348b/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
+110            android:authorities="me.ahmetakil.shopping_list.firebaseinitprovider"
+110-->[com.google.firebase:firebase-common:19.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/329f4232192bc410a462f3231b01348b/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
+111            android:exported="false"
+111-->[com.google.firebase:firebase-common:19.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/329f4232192bc410a462f3231b01348b/jetified-firebase-common-19.3.0/AndroidManifest.xml:29:13-37
+112            android:initOrder="100" />
+112-->[com.google.firebase:firebase-common:19.3.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/329f4232192bc410a462f3231b01348b/jetified-firebase-common-19.3.0/AndroidManifest.xml:30:13-36
+113
+114        <activity
+114-->[com.google.android.gms:play-services-base:17.0.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/4c0b774c09d5393feb013f0dbe753af3/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+115            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+115-->[com.google.android.gms:play-services-base:17.0.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/4c0b774c09d5393feb013f0dbe753af3/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+116            android:exported="false"
+116-->[com.google.android.gms:play-services-base:17.0.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/4c0b774c09d5393feb013f0dbe753af3/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+117            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+117-->[com.google.android.gms:play-services-base:17.0.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/4c0b774c09d5393feb013f0dbe753af3/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+118
+119        <meta-data
+119-->[com.google.android.gms:play-services-basement:17.0.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/efadef26098a875b29e97ea016655c0d/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+120            android:name="com.google.android.gms.version"
+120-->[com.google.android.gms:play-services-basement:17.0.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/efadef26098a875b29e97ea016655c0d/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+121            android:value="@integer/google_play_services_version" />
+121-->[com.google.android.gms:play-services-basement:17.0.0] /Users/deathoftime/.gradle/caches/transforms-2/files-2.1/efadef26098a875b29e97ea016655c0d/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+122    </application>
+123
+124</manifest>
