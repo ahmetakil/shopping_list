@@ -52,7 +52,7 @@ class ItemDialog extends StatelessWidget {
           onPressed: () async {
             String name = _nameController.text;
             Urgency urgency =
-                Provider.of<UrgencyProvider>(context, listen: false).urgency;
+                Provider.of<UrgencyProvider>(context, listen: false).urgency ?? Urgency.AZ;
             if (_nameController.text.isEmpty ||
                 _nameController.text.length < 1) {
               _scaffoldKey.currentState.removeCurrentSnackBar();
@@ -78,8 +78,6 @@ class ItemDialog extends StatelessWidget {
 class UrgencyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final urgency = Provider.of<UrgencyProvider>(context).urgency;
-
     return Container(
       padding: EdgeInsets.only(top: 16),
       child: Column(
