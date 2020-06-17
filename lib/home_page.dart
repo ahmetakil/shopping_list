@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shopping_list/models/item.dart';
 import 'package:shopping_list/models/urgency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'itemDialog.dart';
-import 'list_item.dart';
+import 'widgets/item_dialog.dart';
+import 'widgets/list_item.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
           showDialog(
               context: context,
               barrierDismissible: false,
-              builder: (_) => ItemDialog(_scaffoldKey));
+              builder: (_) => ItemDialog(_scaffoldKey.currentState));
         },
         child: Icon(Icons.add),
       ),
@@ -43,7 +43,10 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: StreamBuilder<QuerySnapshot>(
-                stream: Firestore.instance.collection("items").orderBy("name").snapshots(),
+                stream: Firestore.instance
+                    .collection("items")
+                    .orderBy("name")
+                    .snapshots(),
                 builder: (_, snapshot) {
                   if (snapshot.hasError) {
                     return Text("Error");
@@ -61,7 +64,11 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                       itemBuilder: (_, index) {
                         final doc = documents[index];
-                        Item item = Item(name: doc["name"],urgency: UrgencyExtension.fromLabel(doc["urgency"]));
+                        Item item = Item(
+                            id: doc.documentID,
+                            name: doc["name"],
+                            urgency:
+                                UrgencyExtension.fromLabel(doc["urgency"]));
                         return Dismissible(
                           key: ValueKey("${doc["name"]}"),
                           onDismissed: (_) {
