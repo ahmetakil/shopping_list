@@ -80,10 +80,6 @@ class _ItemDialogState extends State<ItemDialog> {
                     return;
                   }
 
-                  setState(() {
-                    loading = true;
-                  });
-
                   // Checking to see that there is already not an item with the same name
                   final QuerySnapshot firestoreItems = await Firestore.instance
                       .collection("items")
@@ -100,6 +96,10 @@ class _ItemDialogState extends State<ItemDialog> {
                     ));
                     return;
                   }
+
+                  setState(() {
+                    loading = true;
+                  });
 
                   final result =
                       await Firestore.instance.collection("items").add({

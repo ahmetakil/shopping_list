@@ -54,7 +54,7 @@ class _ModifyDialogState extends State<ModifyDialog> {
           child: Text("Cancel"),
         ),
         RaisedButton(
-          child: loading ? CircularProgressIndicator() : Text("Add"),
+          child: loading ? CircularProgressIndicator() : Text("Modify"),
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -75,6 +75,7 @@ class _ModifyDialogState extends State<ModifyDialog> {
                       content: Text("Lütfen Geçerli Bir İsim Girin"),
                       duration: Duration(seconds: 2),
                     ));
+
                     return;
                   }
 
