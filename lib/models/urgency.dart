@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum Urgency{
   AZ,
   ORTA,
-  COK
+  COK,
 }
 
 extension UrgencyExtension on Urgency{

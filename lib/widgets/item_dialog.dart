@@ -1,15 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/provider/urgency_provider.dart';
+import 'package:shopping_list/util/firestore_operations.dart';
 import 'package:shopping_list/widgets/urgency_list.dart';
 
 import '../models/urgency.dart';
 
 class ItemDialog extends StatefulWidget {
   final ScaffoldState _scaffoldState;
+  final String id;
 
-  ItemDialog(this._scaffoldState);
+  ItemDialog(this._scaffoldState, this.id);
 
   @override
   _ItemDialogState createState() => _ItemDialogState();
@@ -80,14 +81,8 @@ class _ItemDialogState extends State<ItemDialog> {
                     return;
                   }
 
-                  // Checking to see that there is already not an item with the same name
-                  final QuerySnapshot firestoreItems = await Firestore.instance
-                      .collection("items")
-                      .where("name", isEqualTo: name)
-                      .getDocuments();
-
-                  // Adding an item and not in modify mode (So the length has to be 0)
-                  if (firestoreItems.documents.length != 0) {
+                  if (await FirestoreOperations.doesItemExists(
+                      widget.id, name)) {
                     widget._scaffoldState.removeCurrentSnackBar();
                     widget._scaffoldState.showSnackBar(SnackBar(
                       content:
@@ -101,11 +96,7 @@ class _ItemDialogState extends State<ItemDialog> {
                     loading = true;
                   });
 
-                  final result =
-                      await Firestore.instance.collection("items").add({
-                    'name': name,
-                    'urgency': urgency.value,
-                  });
+                  FirestoreOperations.addNewItem(widget.id, name, urgency);
                   setState(() {
                     loading = false;
                   });

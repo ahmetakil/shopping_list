@@ -1,9 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/models/item.dart';
 import 'package:shopping_list/models/urgency.dart';
+import 'package:shopping_list/provider/id_provider.dart';
 import 'package:shopping_list/provider/urgency_provider.dart';
+import 'package:shopping_list/util/firestore_operations.dart';
 import 'package:shopping_list/widgets/urgency_list.dart';
 
 class ModifyDialog extends StatefulWidget {
@@ -83,13 +84,10 @@ class _ModifyDialogState extends State<ModifyDialog> {
                     loading = true;
                   });
 
-                  final result = await Firestore.instance
-                      .collection("items")
-                      .document(widget.item.id)
-                      .updateData({
-                    "name": name,
-                    "urgency": urgency.value,
-                  });
+                  String ID = Provider.of<IdProvider>(context,listen: false).id;
+                  FirestoreOperations.updateItem(
+                      ID, widget.item.id, name, urgency);
+
                   setState(() {
                     loading = false;
                   });

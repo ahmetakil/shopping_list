@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../models/item.dart';
 import '../models/urgency.dart';
-import 'item_dialog.dart';
 import 'modify_dialog.dart';
 
 class ListItem extends StatelessWidget {
