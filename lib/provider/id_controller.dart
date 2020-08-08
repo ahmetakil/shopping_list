@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class IdProvider with ChangeNotifier {
+class IdController extends GetxController {
   String id;
 
   void setId(String newId) {
     id = newId;
-    notifyListeners();
+    update();
   }
 }

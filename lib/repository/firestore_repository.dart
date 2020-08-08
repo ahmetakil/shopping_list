@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nanoid/async/nanoid.dart';
 import 'package:shopping_list/models/urgency.dart';
 
-class FirestoreOperations {
+class FirestoreRepository {
   static Firestore _instance = Firestore.instance;
 
   static Future<bool> doesItemExists(String ID, String itemName) async {
@@ -23,6 +23,9 @@ class FirestoreOperations {
   }
 
   static Future<bool> canFetchList(String ID) async {
+    if(ID.isEmpty) {
+      return false;
+    }
    final doc = await _instance.document("list/$ID").get();
 
    if(!doc.exists){

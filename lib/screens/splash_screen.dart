@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_splash/flutter_splash.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shopping_list/provider/id_provider.dart';
+import 'package:get/get.dart';
+import 'package:shopping_list/provider/id_controller.dart';
+import 'package:shopping_list/repository/local_storage_repository.dart';
 import 'package:shopping_list/screens/choose_screen.dart';
 import 'package:shopping_list/screens/list_screen.dart';
+import 'package:shopping_list/util/ui_helpers.dart';
+
+import 'choose_language_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,15 +15,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Future<void> checkListId() async {
-    SharedPreferences instance = await SharedPreferences.getInstance();
 
-    if (!instance.containsKey("list")) {
+  Future<void> checkListId() async {
+
+    await LocalStorageRepository.initialize();
+
+    if (!LocalStorageRepository.hasLanguage()) {
+      return Future.delayed(Duration(seconds: 1), () => ChooseLanguage());
+    }
+
+    String localeId = LocalStorageRepository.getLanguage();
+    Get.updateLocale(Locale(localeId));
+
+    if (!LocalStorageRepository.hasListId()) {
       return Future.delayed(Duration(seconds: 1), () => ChooseScreen());
     }
 
-    String listId = instance.getString("list");
-    Provider.of<IdProvider>(context, listen: false).setId(listId);
+    String listId = LocalStorageRepository.getListId();
+    Get.find<IdController>().setId(listId);
 
     return Future.delayed(Duration(seconds: 1), () => ListScreen());
   }
@@ -32,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Splash(
       navigateAfterFuture: () => checkListId(),
       backgroundColor: Colors.blueAccent,

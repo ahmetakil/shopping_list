@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shopping_list/provider/urgency_provider.dart';
-import 'package:shopping_list/util/firestore_operations.dart';
+import 'package:get/get.dart';
+import 'package:shopping_list/provider/urgency_controller.dart';
+import 'package:shopping_list/repository/firestore_repository.dart';
 import 'package:shopping_list/widgets/urgency_list.dart';
 
 import '../models/urgency.dart';
@@ -67,10 +67,8 @@ class _ItemDialogState extends State<ItemDialog> {
               ? null
               : () async {
                   String name = _nameController.text;
-                  Urgency urgency =
-                      Provider.of<UrgencyProvider>(context, listen: false)
-                              .urgency ??
-                          Urgency.AZ;
+                  Urgency urgency = Get.find<UrgencyController>().urgency;
+
                   if (_nameController.text.isEmpty ||
                       _nameController.text.length < 1) {
                     widget._scaffoldState.removeCurrentSnackBar();
@@ -81,7 +79,7 @@ class _ItemDialogState extends State<ItemDialog> {
                     return;
                   }
 
-                  if (await FirestoreOperations.doesItemExists(
+                  if (await FirestoreRepository.doesItemExists(
                       widget.id, name)) {
                     widget._scaffoldState.removeCurrentSnackBar();
                     widget._scaffoldState.showSnackBar(SnackBar(
@@ -96,7 +94,7 @@ class _ItemDialogState extends State<ItemDialog> {
                     loading = true;
                   });
 
-                  FirestoreOperations.addNewItem(widget.id, name, urgency);
+                  FirestoreRepository.addNewItem(widget.id, name, urgency);
                   setState(() {
                     loading = false;
                   });

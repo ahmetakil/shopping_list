@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shopping_list/provider/id_provider.dart';
-import 'package:shopping_list/util/firestore_operations.dart';
+import 'package:shopping_list/provider/id_controller.dart';
+import 'package:shopping_list/repository/firestore_repository.dart';
 
 import 'list_screen.dart';
 
@@ -18,9 +18,11 @@ class _ChooseScreenState extends State<ChooseScreen> {
   void createNewListAndForward(BuildContext context) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
 
-    String id = await FirestoreOperations.createNewList();
+    String id = await FirestoreRepository.createNewList();
 
-    Provider.of<IdProvider>(context, listen: false).setId(id);
+    Get.put<IdController>(IdController());
+    Get.find<IdController>().setId(id);
+
     await sp.setString("list", id);
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -71,7 +73,7 @@ class _ChooseScreenState extends State<ChooseScreen> {
                                   borderRadius: BorderRadius.circular(8)),
                               color: Theme.of(context).primaryColor,
                               child: Text(
-                                "Create New List",
+                                'create_list'.tr,
                                 style: TextStyle(color: Colors.white),
                               ),
                               onPressed: () {
@@ -93,7 +95,8 @@ class _ChooseScreenState extends State<ChooseScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 10),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 10),
                             child: Text("I already have a list ",
                                 style: TextStyle(fontSize: 20)),
                           ),
@@ -153,8 +156,9 @@ class _ChooseScreenState extends State<ChooseScreen> {
                                         final String givenId =
                                             _idController.text;
 
-                                        if (!await FirestoreOperations
+                                        if (!await FirestoreRepository
                                             .canFetchList(givenId)) {
+
                                           _scaffoldKey.currentState
                                               .removeCurrentSnackBar();
                                           _scaffoldKey.currentState
@@ -166,11 +170,11 @@ class _ChooseScreenState extends State<ChooseScreen> {
                                           return;
                                         }
 
-                                        Provider.of<IdProvider>(context,
-                                                listen: false)
-                                            .setId(givenId);
-                                       final sp = await SharedPreferences.getInstance();
-                                       sp.setString("list", givenId);
+                                        Get.find<IdController>().setId(givenId);
+
+                                        final sp = await SharedPreferences
+                                            .getInstance();
+                                        sp.setString("list", givenId);
                                         Navigator.of(context).pop();
                                         Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
