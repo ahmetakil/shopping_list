@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shopping_list/provider/id_controller.dart';
 import 'package:shopping_list/repository/firestore_repository.dart';
 import 'package:shopping_list/repository/local_storage_repository.dart';
+import 'package:shopping_list/screens/settings_screen.dart';
 import 'package:shopping_list/util/styles.dart';
 import 'package:shopping_list/util/ui_helpers.dart';
 import 'package:shopping_list/widgets/join_list_dialog.dart';
@@ -43,15 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: WHITE,
         body: Stack(
           children: [
-            if (navigator.canPop())
-              Positioned(
-                top: 2,
-                left: 0,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {},
-                ),
+            Positioned(
+              top: 2,
+              right: 0,
+              child: IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () => Get.off(SettingsScreen()),
               ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
               child: Column(
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       RichText(
                         text: TextSpan(
-                            text: "List ",
+                            text: "Your".tr + " ",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 28,
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             children: [
                               TextSpan(
-                                  text: "name",
+                                  text: "Lists".tr,
                                   style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                   )),
@@ -167,13 +167,13 @@ class CachedListTile extends StatelessWidget {
       },
       child: Container(
           height: 50,
-          margin: EdgeInsets.only(bottom: 8),
+          margin: EdgeInsets.only(bottom: 10),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Text(
-                  "${index}. List:",
+                  "${index}.List:",
                   style: TextStyle(
                     color: ORANGE,
                     fontSize: 18,
@@ -182,7 +182,7 @@ class CachedListTile extends StatelessWidget {
                 ),
                 horizontalSpaceMedium,
                 Text(
-                  id,
+                  "$id",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

@@ -18,7 +18,7 @@ class ListItem extends StatelessWidget {
           showDialog(
               context: context,
               barrierDismissible: false,
-              builder: (_) => ModifyDialog(Scaffold.of(context), item));
+              builder: (_) => ModifyDialog(item));
         },
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
@@ -26,27 +26,14 @@ class ListItem extends StatelessWidget {
           child: Container(
             child: Row(
               children: [
-                Text(
-                  "${index + 1}.",
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
+                CircleAvatar(
+                  backgroundColor: item.urgency.color,
                 ),
                 horizontalSpaceSmall,
                 Text(
                   item.name,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-                Spacer(),
-                Text(
-                  item.urgency.name,
-                  style: TextStyle(
-                    color: item.urgency.color,
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                horizontalSpaceMedium,
               ],
             ),
           ),

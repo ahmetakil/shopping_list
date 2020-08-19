@@ -35,12 +35,17 @@ class FirestoreRepository {
    return true;
   }
 
-  static void updateItem(
-      String ID, String itemId, String name, Urgency urgency) {
-    _instance.collection("list/$ID/items").document(itemId).updateData({
-      "name": name,
-      "urgency": urgency.value,
-    });
+  static Future<void> updateItem(
+      String ID, String itemId, String name, Urgency urgency) async{
+
+   try{
+     await _instance.collection("list/$ID/items").document(itemId).updateData({
+       "name": name,
+       "urgency": urgency.value,
+     });
+   }catch(e){
+     print('FirestoreRepository.updateItem: $e');
+   }
   }
 
   static Future<String> createNewList() async {
@@ -60,7 +65,9 @@ class FirestoreRepository {
   Because firebase does not like empty documents without any fields TODO: Improve this
    */
     final unusedFile =
-        await _instance.collection("list").document(ID).setData({"x": "x"});
+        await _instance.collection("list").document(ID).setData({
+          'created_at': FieldValue.serverTimestamp(),
+        });
 
     final doc = await _instance
         .collection("list/$ID/items")

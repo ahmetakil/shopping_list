@@ -28,7 +28,7 @@ class _ItemDialogState extends State<ItemDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        "Add Item",
+        "Add Item".tr,
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -43,7 +43,7 @@ class _ItemDialogState extends State<ItemDialog> {
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: "Name",
+                labelText: "Name".tr,
               ),
               onSubmitted: (_) => FocusScope.of(context).unfocus(),
             ),
@@ -54,10 +54,10 @@ class _ItemDialogState extends State<ItemDialog> {
       actions: <Widget>[
         FlatButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text("Cancel"),
+          child: Text("Cancel".tr),
         ),
         RaisedButton(
-          child: loading ? CircularProgressIndicator() : Text("Add"),
+          child: loading ? CircularProgressIndicator() : Text("Add".tr),
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -70,7 +70,6 @@ class _ItemDialogState extends State<ItemDialog> {
 
                   if (_nameController.text.isEmpty ||
                       _nameController.text.length < 1) {
-
                     Get.rawSnackbar(
                       message: "invalid_name".tr,
                       duration: Duration(seconds: 2),
@@ -81,7 +80,7 @@ class _ItemDialogState extends State<ItemDialog> {
                   if (await FirestoreRepository.doesItemExists(
                       widget.id, name)) {
                     Get.rawSnackbar(
-                      message: "Bu isimde bir ürün zaten listede mevcut ! ",
+                      message: "already_exists".tr,
                       duration: Duration(seconds: 2),
                     );
 

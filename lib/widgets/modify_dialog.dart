@@ -8,10 +8,9 @@ import 'package:shopping_list/repository/firestore_repository.dart';
 import 'package:shopping_list/widgets/urgency_list.dart';
 
 class ModifyDialog extends StatefulWidget {
-  final ScaffoldState _scaffoldState;
   final Item item;
 
-  ModifyDialog(this._scaffoldState, this.item);
+  ModifyDialog(this.item);
 
   @override
   _ModifyDialogState createState() => _ModifyDialogState();
@@ -19,11 +18,13 @@ class ModifyDialog extends StatefulWidget {
 
 class _ModifyDialogState extends State<ModifyDialog> {
   final TextEditingController _nameController = TextEditingController();
+  IdController controller;
   bool loading = false;
 
   @override
   void initState() {
     _nameController.text = widget.item.name;
+    controller = Get.find<IdController>();
     super.initState();
   }
 
@@ -41,7 +42,7 @@ class _ModifyDialogState extends State<ModifyDialog> {
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: "Name",
+                labelText: "Name".tr,
               ),
               onSubmitted: (_) => FocusScope.of(context).unfocus(),
             ),
@@ -52,10 +53,10 @@ class _ModifyDialogState extends State<ModifyDialog> {
       actions: <Widget>[
         FlatButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text("Cancel"),
+          child: Text("Cancel".tr),
         ),
         RaisedButton(
-          child: loading ? CircularProgressIndicator() : Text("Modify"),
+          child: loading ? CircularProgressIndicator() : Text("Modify".tr),
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -69,12 +70,11 @@ class _ModifyDialogState extends State<ModifyDialog> {
 
                   if (_nameController.text.isEmpty ||
                       _nameController.text.length < 1) {
-                    widget._scaffoldState.removeCurrentSnackBar();
-                    widget._scaffoldState.showSnackBar(SnackBar(
-                      content: Text('invalid_name'.tr),
+                    Get.rawSnackbar(
+                      message: 'invalid_name'.tr,
                       duration: Duration(seconds: 2),
-                    ));
-
+                      isDismissible: true
+                    );
                     return;
                   }
 
@@ -82,11 +82,10 @@ class _ModifyDialogState extends State<ModifyDialog> {
                     loading = true;
                   });
 
-                  Get.put<IdController>(IdController());
-                  String ID = Get.find<IdController>().id;
+                  String listId = controller.id;
 
                   FirestoreRepository.updateItem(
-                      ID, widget.item.id, name, urgency);
+                      listId, widget.item.id, name, urgency);
 
                   setState(() {
                     loading = false;

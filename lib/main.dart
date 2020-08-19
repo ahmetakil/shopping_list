@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopping_list/screens/choose_language_screen.dart';
+import 'package:shopping_list/screens/settings_screen.dart';
 import 'package:shopping_list/screens/home_screen.dart';
 import 'home_page.dart';
 
@@ -19,7 +19,7 @@ void main() => runApp(
             name: '/',
             page: () => HomePage(),
           ),
-          GetPage(name: "/ChooseLanguage", page: () => ChooseLanguage()),
+          GetPage(name: "/ChooseLanguage", page: () => SettingsScreen()),
           GetPage(name: "/HomeScreen", page: () => HomeScreen()),
         ],
       ),
@@ -40,6 +40,7 @@ class MyTranslations extends Translations {
       'Urgency.ORTA': 'Medium',
       'Urgency.COK': 'Urgent',
       'Name': 'Name',
+      "already_exists": "An item with this name already exists in the list",
     },
     'tr': {
       'title': 'Hoşgeldiniz',
@@ -53,7 +54,16 @@ class MyTranslations extends Translations {
       'Urgency.ORTA': 'Orta',
       'Urgency.COK': 'Acil',
       'Name': 'Isım',
-
+      "Your": "Senin",
+      "Lists": "Listelerin",
+      "Add": "Ekle",
+      "Add Item": "Ürün Ekle",
+      "Cancel": "İptal",
+      "already_exists": "Bu isimde bir ürün zaten mevcut!",
+      "Modify": "Güncelle",
+      "Save": "Kaydet",
+      "Change Language": "Dil Değiştir",
+      "Settings": "Ayarlar",
     }
   };
 }

@@ -6,7 +6,7 @@ import 'package:shopping_list/repository/local_storage_repository.dart';
 import 'package:shopping_list/screens/list_screen.dart';
 import 'package:shopping_list/util/ui_helpers.dart';
 
-import 'choose_language_screen.dart';
+import 'settings_screen.dart';
 import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await LocalStorageRepository.initialize();
 
     if (!LocalStorageRepository.hasLanguage()) {
-      return Future.delayed(Duration(seconds: 1), () => ChooseLanguage());
+      return Future.delayed(Duration(seconds: 1), () => SettingsScreen());
     }
 
     String localeId = LocalStorageRepository.getLanguage();
@@ -32,9 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
 
     String listId = LocalStorageRepository.getListId();
-    Get.put<IdController>(IdController());
-    Get.find<IdController>().setId(listId);
-
+    Get.put<IdController>(IdController(),permanent: true)..setId(listId);
     return Future.delayed(Duration(seconds: 1), () => ListScreen());
   }
 
