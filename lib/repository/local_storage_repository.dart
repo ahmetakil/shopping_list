@@ -3,7 +3,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocalStorageRepository {
   static SharedPreferences _sharedPreferences;
   static const LANGUAGE_KEY = "lang";
-  static const LIST_KEY = "list";
+  static const LIST_KEY = "list"; // The current list that should be shown
+  static const CACHED_LISTS =
+      "cached_lists"; // An array that is the cached lists.
+
+  static List<String> fetchCacheLists() {
+    return _sharedPreferences.getStringList(CACHED_LISTS) ?? [];
+  }
+
+  static Future<bool> insertToCache(String newListId) async {
+    List<String> currentLists = fetchCacheLists();
+    if(currentLists.contains(newListId)){
+      return false;
+    }
+    currentLists.add(newListId);
+    return await _sharedPreferences.setStringList(CACHED_LISTS, currentLists);
+  }
+
+  static Future<bool> clearCacheList() async {
+    return await _sharedPreferences.remove(CACHED_LISTS);
+  }
 
   static Future<void> initialize() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -35,7 +54,12 @@ class LocalStorageRepository {
   }
 
   static Future<bool> setListId(String id) async {
-    return await _sharedPreferences.setString(LIST_KEY, id);
+    bool result = await _sharedPreferences.setString(LIST_KEY, id);
+    if (!result) {
+      return false;
+    }
+    await insertToCache(id);
+    return result;
   }
 
   static String getListId() {

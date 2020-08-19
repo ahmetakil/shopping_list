@@ -7,7 +7,7 @@ const Widget horizontalSpaceMedium = SizedBox(width: 25.0);
 const Widget verticalSpaceTiny = SizedBox(height: 5.0);
 const Widget verticalSpaceSmall = SizedBox(height: 10.0);
 const Widget verticalSpaceMedium = SizedBox(height: 25.0);
-const Widget verticalSpaceLarge = SizedBox(height: 50.0);
+const Widget verticalSpaceLarge = SizedBox(height: 40.0);
 const Widget verticalSpaceMassive = SizedBox(height: 120.0);
 
 Widget spacedDivider = Column(
@@ -21,6 +21,7 @@ Widget spacedDivider = Column(
 Widget verticalSpace(double height) => SizedBox(height: height);
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
 double screenHeightFraction(BuildContext context,
@@ -46,6 +47,18 @@ class SizeConfig {
   static double pixelRatio;
   static double screenWidthPixel;
   static double screenHeightPixel;
+
+  static Widget verticalSpace(double percentage) {
+    return SizedBox(
+      height: SizeConfig.blockSizeVertical * percentage,
+    );
+  }
+
+  static  Widget horizontalSpace(double percentage) {
+    return SizedBox(
+      width: SizeConfig.blockSizeHorizontal * percentage,
+    );
+  }
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);

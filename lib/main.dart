@@ -38,7 +38,8 @@ class MyTranslations extends Translations {
       'modify_item': 'Modify Item',
       'Urgency.AZ': 'Low',
       'Urgency.ORTA': 'Medium',
-      'Urgency.COK': 'Urgent'
+      'Urgency.COK': 'Urgent',
+      'Name': 'Name',
     },
     'tr': {
       'title': 'Hoşgeldiniz',
@@ -50,7 +51,9 @@ class MyTranslations extends Translations {
       'modify_item': 'Ürünü GÜncelle',
       'Urgency.AZ': 'Az',
       'Urgency.ORTA': 'Orta',
-      'Urgency.COK': 'Acil'
+      'Urgency.COK': 'Acil',
+      'Name': 'Isım',
+
     }
   };
 }

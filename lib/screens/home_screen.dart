@@ -15,17 +15,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> cachedList = [];
+  IdController _controller;
+
   Future<void> createNewListAndForward() async {
     String id = await FirestoreRepository.createNewList();
 
-    Get.put<IdController>(IdController());
-    Get.find<IdController>().setId(id);
-
+    _controller.setId(id);
     await LocalStorageRepository.setListId(id);
 
     navigator.pushReplacement(MaterialPageRoute(
       builder: (_) => ListScreen(),
     ));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = Get.put<IdController>(IdController());
+    cachedList = LocalStorageRepository.fetchCacheLists();
   }
 
   @override
@@ -74,7 +82,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: GREEN,
                     thickness: 4,
                   ),
-                  Spacer(),
+                  verticalSpaceMedium,
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: cachedList.length,
+                      itemBuilder: (_, i) =>
+                          CachedListTile(id: cachedList[i], index: i + 1),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -129,6 +144,64 @@ class _Button extends StatelessWidget {
         child: Text(label.tr, style: TextStyle(color: Colors.white)),
         onPressed: onPressed,
       ),
+    );
+  }
+}
+
+class CachedListTile extends StatelessWidget {
+  final String id;
+  final int index;
+
+  const CachedListTile({Key key, this.id, this.index}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        Get.find<IdController>().setId(id);
+        await LocalStorageRepository.setListId(id);
+
+        navigator.pushReplacement(MaterialPageRoute(
+          builder: (_) => ListScreen(),
+        ));
+      },
+      child: Container(
+          height: 50,
+          margin: EdgeInsets.only(bottom: 8),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(
+                  "${index}. List:",
+                  style: TextStyle(
+                    color: ORANGE,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                horizontalSpaceMedium,
+                Text(
+                  id,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(9)),
+              border: Border.all(color: const Color(0x59abb4bd), width: 0.5),
+              boxShadow: [
+                BoxShadow(
+                    color: const Color(0x10000000),
+                    offset: Offset(0, 5),
+                    blurRadius: 25,
+                    spreadRadius: 0)
+              ],
+              color: const Color(0xffffffff))),
     );
   }
 }
