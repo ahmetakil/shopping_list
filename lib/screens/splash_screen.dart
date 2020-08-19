@@ -3,11 +3,11 @@ import 'package:flutter_splash/flutter_splash.dart';
 import 'package:get/get.dart';
 import 'package:shopping_list/provider/id_controller.dart';
 import 'package:shopping_list/repository/local_storage_repository.dart';
-import 'package:shopping_list/screens/choose_screen.dart';
 import 'package:shopping_list/screens/list_screen.dart';
 import 'package:shopping_list/util/ui_helpers.dart';
 
 import 'choose_language_screen.dart';
+import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -28,10 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Get.updateLocale(Locale(localeId));
 
     if (!LocalStorageRepository.hasListId()) {
-      return Future.delayed(Duration(seconds: 1), () => ChooseScreen());
+      return Future.delayed(Duration(seconds: 1), () => HomeScreen());
     }
 
     String listId = LocalStorageRepository.getListId();
+    Get.put<IdController>(IdController());
     Get.find<IdController>().setId(listId);
 
     return Future.delayed(Duration(seconds: 1), () => ListScreen());

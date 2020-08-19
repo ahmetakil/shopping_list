@@ -9,11 +9,15 @@ class LocalStorageRepository {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  static Future<void> clear() async {
-    await _sharedPreferences.clear();
+  static Future<bool> clear() async {
+    return await _sharedPreferences.clear();
   }
 
-  static Future<bool> setLanguage(String language) async{
+  static Future<bool> clearListId() async {
+    return await _sharedPreferences.remove(LIST_KEY);
+  }
+
+  static Future<bool> setLanguage(String language) async {
     bool success = await _sharedPreferences.setString(LANGUAGE_KEY, language);
     return success;
   }
@@ -28,6 +32,10 @@ class LocalStorageRepository {
 
   static bool hasListId() {
     return _sharedPreferences.containsKey(LIST_KEY);
+  }
+
+  static Future<bool> setListId(String id) async {
+    return await _sharedPreferences.setString(LIST_KEY, id);
   }
 
   static String getListId() {

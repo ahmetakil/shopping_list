@@ -7,10 +7,9 @@ import 'package:shopping_list/widgets/urgency_list.dart';
 import '../models/urgency.dart';
 
 class ItemDialog extends StatefulWidget {
-  final ScaffoldState _scaffoldState;
   final String id;
 
-  ItemDialog(this._scaffoldState, this.id);
+  ItemDialog(this.id);
 
   @override
   _ItemDialogState createState() => _ItemDialogState();
@@ -71,22 +70,21 @@ class _ItemDialogState extends State<ItemDialog> {
 
                   if (_nameController.text.isEmpty ||
                       _nameController.text.length < 1) {
-                    widget._scaffoldState.removeCurrentSnackBar();
-                    widget._scaffoldState.showSnackBar(SnackBar(
-                      content: Text("Lütfen Geçerli Bir İsim Girin"),
+
+                    Get.rawSnackbar(
+                      message: "invalid_name".tr,
                       duration: Duration(seconds: 2),
-                    ));
+                    );
                     return;
                   }
 
                   if (await FirestoreRepository.doesItemExists(
                       widget.id, name)) {
-                    widget._scaffoldState.removeCurrentSnackBar();
-                    widget._scaffoldState.showSnackBar(SnackBar(
-                      content:
-                          Text("Bu isimde bir ürün zaten listede mevcut ! "),
+                    Get.rawSnackbar(
+                      message: "Bu isimde bir ürün zaten listede mevcut ! ",
                       duration: Duration(seconds: 2),
-                    ));
+                    );
+
                     return;
                   }
 

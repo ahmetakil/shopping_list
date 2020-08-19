@@ -30,7 +30,7 @@ class _ModifyDialogState extends State<ModifyDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Modify Item"),
+      title: Text("modify_item".tr),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -71,7 +71,7 @@ class _ModifyDialogState extends State<ModifyDialog> {
                       _nameController.text.length < 1) {
                     widget._scaffoldState.removeCurrentSnackBar();
                     widget._scaffoldState.showSnackBar(SnackBar(
-                      content: Text("Lütfen Geçerli Bir İsim Girin"),
+                      content: Text('invalid_name'.tr),
                       duration: Duration(seconds: 2),
                     ));
 
@@ -82,6 +82,7 @@ class _ModifyDialogState extends State<ModifyDialog> {
                     loading = true;
                   });
 
+                  Get.put<IdController>(IdController());
                   String ID = Get.find<IdController>().id;
 
                   FirestoreRepository.updateItem(

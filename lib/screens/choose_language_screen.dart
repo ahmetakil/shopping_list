@@ -118,7 +118,7 @@ class _LanguageTile extends StatelessWidget {
                     return;
                   }
                   Get.updateLocale(Locale(id));
-                  Get.offAndToNamed("/Choose");
+                  Get.offAndToNamed("/HomeScreen");
 
                 },
                 child: Text(
