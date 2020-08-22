@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_list/provider/urgency_controller.dart';
 import 'package:shopping_list/repository/firestore_repository.dart';
+import 'package:shopping_list/util/styles.dart';
+import 'package:shopping_list/util/ui_helpers.dart';
 import 'package:shopping_list/widgets/urgency_list.dart';
 
 import '../models/urgency.dart';
@@ -27,37 +29,71 @@ class _ItemDialogState extends State<ItemDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(
-        "Add Item".tr,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      title: Text("Add Item".tr,
+          style: const TextStyle(
+              color: const Color(0xff4b515c),
+              fontWeight: FontWeight.w700,
+              fontSize: 19),
+          textAlign: TextAlign.center),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
       content: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        width: SizeConfig.blockSizeHorizontal * 60,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: "Name".tr,
+            SizeConfig.verticalSpace(1),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  border: Border.all(color: const Color(0x59abb4bd), width: 0.5),
+                  boxShadow: [
+                    BoxShadow(
+                        color: const Color(0x10000000),
+                        offset: Offset(0, 5),
+                        blurRadius: 25,
+                        spreadRadius: 0)
+                  ],
+                  color: const Color(0xffffffff)),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 3),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                      labelStyle: TextStyle(
+                          color: const Color(0xffb5c1c9),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17),
+                      hintText: " " + "Name".tr,
+                      border: InputBorder.none),
+                  onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                ),
               ),
-              onSubmitted: (_) => FocusScope.of(context).unfocus(),
             ),
+            SizeConfig.verticalSpace(3),
             UrgencyList(),
+            SizeConfig.verticalSpace(1),
           ],
         ),
       ),
       actions: <Widget>[
         FlatButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text("Cancel".tr),
+          child: Text(
+            "Cancel".tr,
+            style: TextStyle(color: Color(0xff4b515c), fontWeight: FontWeight.w500),
+          ),
         ),
         RaisedButton(
-          child: loading ? CircularProgressIndicator() : Text("Add".tr),
+          child: loading
+              ? CircularProgressIndicator()
+              : Text(
+                  "Add".tr,
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                ),
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -96,7 +132,6 @@ class _ItemDialogState extends State<ItemDialog> {
                     loading = false;
                   });
                   _nameController.clear();
-                  Navigator.of(context).pop();
                 },
         )
       ],

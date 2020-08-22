@@ -5,6 +5,7 @@ import 'package:shopping_list/models/urgency.dart';
 import 'package:shopping_list/provider/id_controller.dart';
 import 'package:shopping_list/provider/urgency_controller.dart';
 import 'package:shopping_list/repository/firestore_repository.dart';
+import 'package:shopping_list/util/ui_helpers.dart';
 import 'package:shopping_list/widgets/urgency_list.dart';
 
 class ModifyDialog extends StatefulWidget {
@@ -31,32 +32,72 @@ class _ModifyDialogState extends State<ModifyDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("modify_item".tr),
+      title: Text(
+        "modify_item".tr,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+            color: const Color(0xff4b515c),
+            fontWeight: FontWeight.w700,
+            fontSize: 19),
+      ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
       content: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        width: SizeConfig.blockSizeHorizontal * 60,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: "Name".tr,
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  border:
+                      Border.all(color: const Color(0x59abb4bd), width: 0.5),
+                  boxShadow: [
+                    BoxShadow(
+                        color: const Color(0x10000000),
+                        offset: Offset(0, 5),
+                        blurRadius: 25,
+                        spreadRadius: 0)
+                  ],
+                  color: const Color(0xffffffff)),
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                      labelStyle: TextStyle(
+                          color: const Color(0xffb5c1c9),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17),
+                      hintText: " " + "Name".tr,
+                      border: InputBorder.none),
+                  onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                ),
               ),
-              onSubmitted: (_) => FocusScope.of(context).unfocus(),
             ),
+            SizeConfig.verticalSpace(3),
             UrgencyList(),
+            SizeConfig.verticalSpace(1),
           ],
         ),
       ),
       actions: <Widget>[
         FlatButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text("Cancel".tr),
+          child: Text(
+            "Cancel".tr,
+            style: TextStyle(
+                color: Color(0xff4b515c), fontWeight: FontWeight.w500),
+          ),
         ),
         RaisedButton(
-          child: loading ? CircularProgressIndicator() : Text("Modify".tr),
+          child: loading
+              ? CircularProgressIndicator()
+              : Text(
+                  "Modify".tr,
+                  style: TextStyle(color: Colors.white),
+                ),
           color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -67,14 +108,12 @@ class _ModifyDialogState extends State<ModifyDialog> {
                   String name = _nameController.text;
                   Urgency urgency = Get.find<UrgencyController>().urgency;
 
-
                   if (_nameController.text.isEmpty ||
                       _nameController.text.length < 1) {
                     Get.rawSnackbar(
-                      message: 'invalid_name'.tr,
-                      duration: Duration(seconds: 2),
-                      isDismissible: true
-                    );
+                        message: 'invalid_name'.tr,
+                        duration: Duration(seconds: 2),
+                        isDismissible: true);
                     return;
                   }
 

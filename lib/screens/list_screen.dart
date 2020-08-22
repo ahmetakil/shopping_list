@@ -151,12 +151,13 @@ class _ListScreenState extends State<ListScreen> {
                         'add_new_item'.tr,
                         style: TextStyle(
                           fontSize: 18,
+                          color: Colors.white
                         ),
                       ),
                       onPressed: () {
                         showDialog(
                             context: context,
-                            barrierDismissible: false,
+                            barrierDismissible: true,
                             builder: (_) => ItemDialog(listId));
                       },
                     ),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shopping_list/provider/id_controller.dart';
 import 'package:shopping_list/screens/settings_screen.dart';
 import 'package:shopping_list/screens/home_screen.dart';
+import 'package:shopping_list/util/styles.dart';
 import 'home_page.dart';
 
 void main() {
@@ -12,7 +13,8 @@ void main() {
         initialRoute: "/",
         defaultTransition: Transition.native,
         theme: ThemeData(
-          fontFamily: "OpenSans"
+          fontFamily: "OpenSans",
+          primaryColor: GOLD,
         ),
         translations: MyTranslations(),
         locale: Locale('en'),
@@ -40,9 +42,10 @@ class MyTranslations extends Translations {
       'empty_screen': 'Your list is Empty! Start adding items',
       'invalid_name': 'Please enter a valid item name',
       'modify_item': 'Modify Item',
+      'Urgency': 'Priority',
       'Urgency.AZ': 'Low',
       'Urgency.ORTA': 'Medium',
-      'Urgency.COK': 'Urgent',
+      'Urgency.COK': 'High',
       'Name': 'Name',
       "already_exists": "An item with this name already exists in the list",
       "invalid_id": "Please enter a valid ID.",
@@ -54,11 +57,12 @@ class MyTranslations extends Translations {
       'add_new_item': 'Yeni Eşya Ekle',
       'empty_screen': 'Listeniz boş, eşya ekleyin',
       'invalid_name': "Lütfen Geçerli Bir İsim Girin",
-      'modify_item': 'Ürünü GÜncelle',
+      'modify_item': 'Ürünü Güncelle',
+      'Urgency': 'Aciliyet',
       'Urgency.AZ': 'Az',
       'Urgency.ORTA': 'Orta',
       'Urgency.COK': 'Acil',
-      'Name': 'Isım',
+      'Name': 'İsim',
       "Your": "Senin",
       "Lists": "Listelerin",
       "Add": "Ekle",

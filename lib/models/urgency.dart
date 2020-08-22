@@ -23,7 +23,7 @@ extension UrgencyExtension on Urgency{
       return Color(0xff40a832);
     }
     if(this == Urgency.ORTA){
-      return Color(0xffA5AA4F);
+      return Color(0xfff5e042);
     }
     if(this == Urgency.COK){
       return Color(0xfff03b1f);

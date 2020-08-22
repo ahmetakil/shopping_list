@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_list/provider/urgency_controller.dart';
+import 'package:shopping_list/util/styles.dart';
 
 import '../models/urgency.dart';
 
@@ -18,7 +19,6 @@ class _UrgencyBoxState extends State<UrgencyBox> {
 
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: () {
         Get.find<UrgencyController>().setUrgency(widget.urgency);
@@ -26,12 +26,12 @@ class _UrgencyBoxState extends State<UrgencyBox> {
       child: Column(
         children: [
           Container(
+            height: 40,
+            width: 32,
             decoration: BoxDecoration(
               color: widget.urgency.color,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(10),
             ),
-            width: 40,
-            height: 40,
           ),
           SizedBox(
             height: 5,
@@ -39,12 +39,19 @@ class _UrgencyBoxState extends State<UrgencyBox> {
           GetBuilder<UrgencyController>(
             init: UrgencyController(),
             builder: (UrgencyController controller) => Text(
-              widget.urgency.value,
+              widget.urgency.toString().tr,
+              textAlign: TextAlign.right,
               style: controller.isSelectedUrgency(widget.urgency)
                   ? TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold)
-                  : TextStyle(),
+                      color: GOLD,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 18)
+                  : TextStyle(
+                      color: const Color(0xff4b515c),
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 16),
             ),
           )
         ],
