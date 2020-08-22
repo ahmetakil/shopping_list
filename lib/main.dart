@@ -82,9 +82,12 @@ class MyTranslations extends Translations {
 
 /*
   TODO:
-    1. Allow for removal of lists from home page.
+    1. Allow for removal of lists from home page. [X]
     2. Implement local notifications.
     3. Implement firebase auth.
+    4. Share button
+    5. Sort items respect to urgency [X]
+
 
 
 

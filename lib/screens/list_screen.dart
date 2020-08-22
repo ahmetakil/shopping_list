@@ -103,7 +103,7 @@ class _ListScreenState extends State<ListScreen> {
                             ),
                           );
                         }
-                        final documents = snapshot.data.documents;
+                        final List<DocumentSnapshot> documents = snapshot.data.documents;
 
                         if (documents == null || documents.length == 0) {
                           return Center(
@@ -113,28 +113,36 @@ class _ListScreenState extends State<ListScreen> {
                             ),
                           );
                         }
+
+                        final List<Item> items = documents.map(
+                            (DocumentSnapshot doc) => Item(
+                              id: doc.documentID,
+                              name: doc["name"],
+                              urgency: UrgencyExtension.fromLabel(doc["urgency"]),
+                              reference: doc.reference,
+                            )
+                        ).toList();
+
+                        items.sort( (a,b) => b.urgency.priority.compareTo(a.urgency.priority));
+
+
                         return ListView.builder(
                             itemBuilder: (_, index) {
-                              final doc = documents[index];
-                              Item item = Item(
-                                  id: doc.documentID,
-                                  name: doc["name"],
-                                  urgency: UrgencyExtension.fromLabel(
-                                      doc["urgency"]));
+                              Item item = items[index];
                               return Dismissible(
-                                key: ValueKey("${doc["name"]}"),
+                                key: ValueKey(items[index].name),
                                 onDismissed: (_) {
-                                  doc.reference.delete();
+                                  item.reference.delete();
                                 },
                                 child: ListItem(
                                     item: item,
                                     index: index,
                                     delete: () {
-                                      doc.reference.delete();
+                                      item.reference.delete();
                                     }),
                               );
                             },
-                            itemCount: documents.length);
+                            itemCount: items.length);
                       },
                     ),
                   ),

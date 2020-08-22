@@ -9,12 +9,20 @@ enum Urgency{
 
 extension UrgencyExtension on Urgency{
 
+  int get priority {
+    /*
+    Returns AZ -> 0
+            ORTA -> 1
+            COK -> 2,
+     */
+    return Urgency.values.indexOf(this);
+  }
+
   String get value{
     return this.toString().split(".")[1];
   }
 
   String get name {
-
     return this.toString().tr;
   }
 
