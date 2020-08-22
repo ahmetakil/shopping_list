@@ -36,32 +36,19 @@ class _ListScreenState extends State<ListScreen> {
         backgroundColor: WHITE,
         body: Stack(
           children: [
-            if (navigator.canPop())
-              Positioned(
-                top: 2,
-                left: 0,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    navigator.pop();
-                  },
-                ),
-              ),
             Positioned(
               top: 2,
               right: 0,
               child: IconButton(
                 icon: Icon(Icons.cancel),
-                onPressed: () async{
-                  await LocalStorageRepository
-                      .clearListId();
+                onPressed: () async {
+                  await LocalStorageRepository.clearListId();
                   Get.offAll(HomeScreen());
                 },
               ),
             ),
             Padding(
-              padding:
-              const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
               child: Column(
                 children: [
                   verticalSpaceSmall,
@@ -83,11 +70,14 @@ class _ListScreenState extends State<ListScreen> {
                                   )),
                             ]),
                       ),
-                      Text(listId,style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: ORANGE,
-                      ),),
+                      Text(
+                        listId,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: ORANGE,
+                        ),
+                      ),
                     ],
                   ),
                   verticalSpaceSmall,
@@ -96,54 +86,51 @@ class _ListScreenState extends State<ListScreen> {
                     thickness: 4,
                   ),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: StreamBuilder<QuerySnapshot>(
-                        stream: Firestore.instance
-                            .collection("list/$listId/items")
-                            .snapshots(),
-                        builder: (_, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text("Error");
-                          }
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: Container(
-                                width: 200,
-                                height: 200,
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                          }
-                          final documents = snapshot.data.documents;
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: Firestore.instance
+                          .collection("list/$listId/items")
+                          .snapshots(),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text("Error");
+                        }
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: Container(
+                              width: 200,
+                              height: 200,
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        }
+                        final documents = snapshot.data.documents;
 
-                          if (documents == null || documents.length == 0) {
-                            return Center(
-                              child: Text(
-                                "empty_screen".tr,
-                                style: TextStyle(fontSize: 24),
-                              ),
-                            );
-                          }
-                          return ListView.builder(
-                              itemBuilder: (_, index) {
-                                final doc = documents[index];
-                                Item item = Item(
-                                    id: doc.documentID,
-                                    name: doc["name"],
-                                    urgency: UrgencyExtension.fromLabel(
-                                        doc["urgency"]));
-                                return Dismissible(
-                                  key: ValueKey("${doc["name"]}"),
-                                  onDismissed: (_) {
-                                    doc.reference.delete();
-                                  },
-                                  child: ListItem(item, index),
-                                );
-                              },
-                              itemCount: documents.length);
-                        },
-                      ),
+                        if (documents == null || documents.length == 0) {
+                          return Center(
+                            child: Text(
+                              "empty_screen".tr,
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          );
+                        }
+                        return ListView.builder(
+                            itemBuilder: (_, index) {
+                              final doc = documents[index];
+                              Item item = Item(
+                                  id: doc.documentID,
+                                  name: doc["name"],
+                                  urgency: UrgencyExtension.fromLabel(
+                                      doc["urgency"]));
+                              return Dismissible(
+                                key: ValueKey("${doc["name"]}"),
+                                onDismissed: (_) {
+                                  doc.reference.delete();
+                                },
+                                child: ListItem(item, index),
+                              );
+                            },
+                            itemCount: documents.length);
+                      },
                     ),
                   ),
                   verticalSpaceSmall,

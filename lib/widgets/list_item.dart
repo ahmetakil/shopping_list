@@ -21,34 +21,40 @@ class ListItem extends StatelessWidget {
               builder: (_) => ModifyDialog(item));
         },
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-          padding: EdgeInsets.all(3),
+          margin: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+          padding: EdgeInsets.symmetric(horizontal: 6,vertical: 8),
           child: Container(
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: item.urgency.color,
-                ),
-                horizontalSpaceSmall,
-                Text(
-                  item.name,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(9)),
+              border: Border.all(color: const Color(0x59abb4bd), width: 0.5),
+              boxShadow: [
+                BoxShadow(
+                    color: const Color(0x10000000),
+                    offset: Offset(0, 5),
+                    blurRadius: 25,
+                    spreadRadius: 0)
               ],
+              color: const Color(0xffffffff),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 4),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: item.urgency.color,
+                    radius: 16,
+                  ),
+                  horizontalSpaceSmall,
+                  Flexible(
+                    child: Text(
+                      item.name,
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ));
   }
 }
-
-/*
-ListTile(
-          title: Text(
-            "${item.name}",
-            style: TextStyle(
-                ),
-          ),
-
-        ),
-      ),
- */
