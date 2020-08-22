@@ -20,6 +20,15 @@ class LocalStorageRepository {
     return await _sharedPreferences.setStringList(CACHED_LISTS, currentLists);
   }
 
+  static Future<bool> removeFromCache(String newListId) async {
+    List<String> currentLists = fetchCacheLists();
+    if(!currentLists.contains(newListId)){
+      return false;
+    }
+    currentLists.remove(newListId);
+    return await _sharedPreferences.setStringList(CACHED_LISTS, currentLists);
+  }
+
   static Future<bool> clearCacheList() async {
     return await _sharedPreferences.remove(CACHED_LISTS);
   }

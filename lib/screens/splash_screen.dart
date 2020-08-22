@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
 
     String listId = LocalStorageRepository.getListId();
-    Get.put<IdController>(IdController(),permanent: true)..setId(listId);
+    Get.find<IdController>().setId(listId);
     return Future.delayed(Duration(seconds: 1), () => ListScreen());
   }
 

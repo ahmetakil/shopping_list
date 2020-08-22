@@ -30,6 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
+  void update() {
+    cachedList = LocalStorageRepository.fetchCacheLists();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -86,8 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: ListView.builder(
                       itemCount: cachedList.length,
-                      itemBuilder: (_, i) =>
-                          CachedListTile(id: cachedList[i], index: i + 1),
+                      itemBuilder: (_, i) => CachedListTile(
+                        id: cachedList[i],
+                        index: i + 1,
+                        update: update,
+                      ),
                     ),
                   ),
                   Row(
@@ -151,8 +159,10 @@ class _Button extends StatelessWidget {
 class CachedListTile extends StatelessWidget {
   final String id;
   final int index;
+  final Function update;
 
-  const CachedListTile({Key key, this.id, this.index}) : super(key: key);
+  const CachedListTile({Key key, this.id, this.index, this.update})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -187,6 +197,17 @@ class CachedListTile extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
+                ),
+                Spacer(),
+                IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: RED,
+                  ),
+                  onPressed: () async {
+                    await LocalStorageRepository.removeFromCache(id);
+                    update();
+                  },
                 ),
               ],
             ),

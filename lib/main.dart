@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopping_list/provider/id_controller.dart';
 import 'package:shopping_list/screens/settings_screen.dart';
 import 'package:shopping_list/screens/home_screen.dart';
 import 'home_page.dart';
 
-void main() => runApp(
+void main() {
+  runApp(
       GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: "/",
@@ -24,6 +26,8 @@ void main() => runApp(
         ],
       ),
     );
+  Get.put<IdController>(IdController());
+}
 
 class MyTranslations extends Translations {
   @override
@@ -41,6 +45,7 @@ class MyTranslations extends Translations {
       'Urgency.COK': 'Urgent',
       'Name': 'Name',
       "already_exists": "An item with this name already exists in the list",
+      "invalid_id": "Please enter a valid ID.",
     },
     'tr': {
       'title': 'Hoşgeldiniz',
@@ -64,6 +69,19 @@ class MyTranslations extends Translations {
       "Save": "Kaydet",
       "Change Language": "Dil Değiştir",
       "Settings": "Ayarlar",
+      "Enter List ID": "Liste ID'nizi Girin.",
+      "invalid_id": "Lütfen geçerli bir ID Girin.",
+      "Submit": "Katıl",
     }
   };
 }
+
+/*
+  TODO:
+    1. Allow for removal of lists from home page.
+    2. Implement local notifications.
+    3. Implement firebase auth.
+
+
+
+ */
