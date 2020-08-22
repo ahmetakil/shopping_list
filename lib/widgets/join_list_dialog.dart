@@ -16,9 +16,9 @@ class JoinDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      title: Text("Enter List ID"),
+      title: Text("Enter List ID".tr),
       content: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        height: MediaQuery.of(context).size.height * 0.2,
         child: Column(
           children: [
             TextField(
@@ -34,21 +34,21 @@ class JoinDialog extends StatelessWidget {
       actions: [
         FlatButton(
           child: Text(
-            "Cancel",
+            "Cancel".tr,
             style: TextStyle(color: Colors.red),
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         RaisedButton(
           color: Colors.green,
-          child: Text("Submit"),
+          child: Text("Submit".tr),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
           onPressed: () async {
             final String givenId = _idController.text;
 
             if (!await FirestoreRepository.canFetchList(givenId)) {
               Get.rawSnackbar(
-                message: "Lütfen Geçerli Bir ID Girin",
+                message: "invalid_id".tr,
                 isDismissible: true,
                 duration: Duration(seconds: 1),
               );
