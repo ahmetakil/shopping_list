@@ -126,7 +126,12 @@ class _ListScreenState extends State<ListScreen> {
                                 onDismissed: (_) {
                                   doc.reference.delete();
                                 },
-                                child: ListItem(item, index),
+                                child: ListItem(
+                                    item: item,
+                                    index: index,
+                                    delete: () {
+                                      doc.reference.delete();
+                                    }),
                               );
                             },
                             itemCount: documents.length);
