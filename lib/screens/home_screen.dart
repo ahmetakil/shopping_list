@@ -136,18 +136,19 @@ class _Button extends StatelessWidget {
   final Color color;
   final Function onPressed;
 
-  const _Button({Key key, this.label, this.color, this.onPressed})
-      : super(key: key);
+  const _Button({Key key, this.label, this.color, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 46,
-      child: RaisedButton(
-        elevation: 3,
-        color: color,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 3,
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
         ),
         child: Text(label.tr, style: TextStyle(color: Colors.white)),
         onPressed: onPressed,
@@ -161,8 +162,7 @@ class CachedListTile extends StatelessWidget {
   final int index;
   final Function update;
 
-  const CachedListTile({Key key, this.id, this.index, this.update})
-      : super(key: key);
+  const CachedListTile({Key key, this.id, this.index, this.update}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +183,7 @@ class CachedListTile extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  "${index}.List:",
+                  "$index.List:",
                   style: TextStyle(
                     color: ORANGE,
                     fontSize: 18,
@@ -215,13 +215,7 @@ class CachedListTile extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(9)),
               border: Border.all(color: const Color(0x59abb4bd), width: 0.5),
-              boxShadow: [
-                BoxShadow(
-                    color: const Color(0x10000000),
-                    offset: Offset(0, 5),
-                    blurRadius: 25,
-                    spreadRadius: 0)
-              ],
+              boxShadow: [BoxShadow(color: const Color(0x10000000), offset: Offset(0, 5), blurRadius: 25, spreadRadius: 0)],
               color: const Color(0xffffffff))),
     );
   }

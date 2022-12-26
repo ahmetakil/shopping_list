@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopping_list/models/urgency.dart';
 import 'package:shopping_list/provider/urgency_controller.dart';
 import 'package:shopping_list/repository/firestore_repository.dart';
-import 'package:shopping_list/util/styles.dart';
 import 'package:shopping_list/util/ui_helpers.dart';
+import 'package:shopping_list/widgets/custom_elevated_button.dart';
 import 'package:shopping_list/widgets/urgency_list.dart';
-
-import '../models/urgency.dart';
 
 class ItemDialog extends StatefulWidget {
   final String id;
@@ -30,11 +29,7 @@ class _ItemDialogState extends State<ItemDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text("Add Item".tr,
-          style: const TextStyle(
-              color: const Color(0xff4b515c),
-              fontWeight: FontWeight.w700,
-              fontSize: 19),
-          textAlign: TextAlign.center),
+          style: const TextStyle(color: const Color(0xff4b515c), fontWeight: FontWeight.w700, fontSize: 19), textAlign: TextAlign.center),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -48,23 +43,14 @@ class _ItemDialogState extends State<ItemDialog> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                   border: Border.all(color: const Color(0x59abb4bd), width: 0.5),
-                  boxShadow: [
-                    BoxShadow(
-                        color: const Color(0x10000000),
-                        offset: Offset(0, 5),
-                        blurRadius: 25,
-                        spreadRadius: 0)
-                  ],
+                  boxShadow: [BoxShadow(color: const Color(0x10000000), offset: Offset(0, 5), blurRadius: 25, spreadRadius: 0)],
                   color: const Color(0xffffffff)),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
                 child: TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                          color: const Color(0xffb5c1c9),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17),
+                      labelStyle: TextStyle(color: const Color(0xffb5c1c9), fontWeight: FontWeight.w400, fontSize: 17),
                       hintText: " " + "Name".tr,
                       border: InputBorder.none),
                   onSubmitted: (_) => FocusScope.of(context).unfocus(),
@@ -78,34 +64,28 @@ class _ItemDialogState extends State<ItemDialog> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
             "Cancel".tr,
             style: TextStyle(color: Color(0xff4b515c), fontWeight: FontWeight.w500),
           ),
         ),
-        RaisedButton(
-          child: loading
+        CElevatedButton(
+          titleWidget: loading
               ? CircularProgressIndicator()
               : Text(
                   "Add".tr,
-                  style: TextStyle(
-                    color: Colors.white
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
           color: Theme.of(context).primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
           onPressed: loading
               ? null
               : () async {
                   String name = _nameController.text;
                   Urgency urgency = Get.find<UrgencyController>().urgency;
 
-                  if (_nameController.text.isEmpty ||
-                      _nameController.text.length < 1) {
+                  if (_nameController.text.isEmpty || _nameController.text.length < 1) {
                     Get.rawSnackbar(
                       message: "invalid_name".tr,
                       duration: Duration(seconds: 2),
@@ -113,8 +93,7 @@ class _ItemDialogState extends State<ItemDialog> {
                     return;
                   }
 
-                  if (await FirestoreRepository.doesItemExists(
-                      widget.id, name)) {
+                  if (await FirestoreRepository.doesItemExists(widget.id, name)) {
                     Get.rawSnackbar(
                       message: "already_exists".tr,
                       duration: Duration(seconds: 2),
@@ -132,6 +111,7 @@ class _ItemDialogState extends State<ItemDialog> {
                     loading = false;
                   });
                   _nameController.clear();
+                  navigator.pop();
                 },
         )
       ],

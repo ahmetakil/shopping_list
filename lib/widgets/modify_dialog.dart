@@ -6,6 +6,7 @@ import 'package:shopping_list/provider/id_controller.dart';
 import 'package:shopping_list/provider/urgency_controller.dart';
 import 'package:shopping_list/repository/firestore_repository.dart';
 import 'package:shopping_list/util/ui_helpers.dart';
+import 'package:shopping_list/widgets/custom_elevated_button.dart';
 import 'package:shopping_list/widgets/urgency_list.dart';
 
 class ModifyDialog extends StatefulWidget {
@@ -35,10 +36,7 @@ class _ModifyDialogState extends State<ModifyDialog> {
       title: Text(
         "modify_item".tr,
         textAlign: TextAlign.center,
-        style: const TextStyle(
-            color: const Color(0xff4b515c),
-            fontWeight: FontWeight.w700,
-            fontSize: 19),
+        style: const TextStyle(color: const Color(0xff4b515c), fontWeight: FontWeight.w700, fontSize: 19),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
@@ -51,25 +49,15 @@ class _ModifyDialogState extends State<ModifyDialog> {
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
-                  border:
-                      Border.all(color: const Color(0x59abb4bd), width: 0.5),
-                  boxShadow: [
-                    BoxShadow(
-                        color: const Color(0x10000000),
-                        offset: Offset(0, 5),
-                        blurRadius: 25,
-                        spreadRadius: 0)
-                  ],
+                  border: Border.all(color: const Color(0x59abb4bd), width: 0.5),
+                  boxShadow: [BoxShadow(color: const Color(0x10000000), offset: Offset(0, 5), blurRadius: 25, spreadRadius: 0)],
                   color: const Color(0xffffffff)),
               child: Padding(
                 padding: const EdgeInsets.all(3.0),
                 child: TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                          color: const Color(0xffb5c1c9),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17),
+                      labelStyle: TextStyle(color: const Color(0xffb5c1c9), fontWeight: FontWeight.w400, fontSize: 17),
                       hintText: " " + "Name".tr,
                       border: InputBorder.none),
                   onSubmitted: (_) => FocusScope.of(context).unfocus(),
@@ -83,37 +71,29 @@ class _ModifyDialogState extends State<ModifyDialog> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
             "Cancel".tr,
-            style: TextStyle(
-                color: Color(0xff4b515c), fontWeight: FontWeight.w500),
+            style: TextStyle(color: Color(0xff4b515c), fontWeight: FontWeight.w500),
           ),
         ),
-        RaisedButton(
-          child: loading
+        CElevatedButton(
+          titleWidget: loading
               ? CircularProgressIndicator()
               : Text(
                   "Modify".tr,
                   style: TextStyle(color: Colors.white),
                 ),
           color: Theme.of(context).primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
           onPressed: loading
               ? null
               : () async {
                   String name = _nameController.text;
                   Urgency urgency = Get.find<UrgencyController>().urgency;
 
-                  if (_nameController.text.isEmpty ||
-                      _nameController.text.length < 1) {
-                    Get.rawSnackbar(
-                        message: 'invalid_name'.tr,
-                        duration: Duration(seconds: 2),
-                        isDismissible: true);
+                  if (_nameController.text.isEmpty || _nameController.text.length < 1) {
+                    Get.rawSnackbar(message: 'invalid_name'.tr, duration: Duration(seconds: 2), isDismissible: true);
                     return;
                   }
 
@@ -123,8 +103,7 @@ class _ModifyDialogState extends State<ModifyDialog> {
 
                   String listId = controller.id;
 
-                  FirestoreRepository.updateItem(
-                      listId, widget.item.id, name, urgency);
+                  FirestoreRepository.updateItem(listId, widget.item.id, name, urgency);
 
                   setState(() {
                     loading = false;

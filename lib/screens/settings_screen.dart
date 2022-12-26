@@ -99,11 +99,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 width: SizeConfig.blockSizeHorizontal * 50,
                 height: 46,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 3,
+                    backgroundColor: GOLD,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
                   ),
-                  color: GOLD,
                   child: Text(
                     'Save'.tr,
                     style: TextStyle(
@@ -111,8 +114,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   onPressed: () async {
-                    bool success =
-                        await LocalStorageRepository.setLanguage(selectedId);
+                    bool success = await LocalStorageRepository.setLanguage(selectedId);
                     if (!success) {
                       Get.rawSnackbar(
                         message: "Bir sorun oluştu",
@@ -141,22 +143,15 @@ class _LanguageTile extends StatelessWidget {
   final Function update;
   final Function isSelected;
 
-  const _LanguageTile(
-      {Key key,
-      this.name,
-      this.description,
-      this.id,
-      this.update,
-      this.isSelected})
-      : super(key: key);
+  const _LanguageTile({Key key, this.name, this.description, this.id, this.update, this.isSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         child: InkWell(
       onTap: () {
-         update(id);
-         Get.updateLocale(Locale(id));
+        update(id);
+        Get.updateLocale(Locale(id));
       },
       child: Text(
         name,

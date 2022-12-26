@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart';
 import 'package:shopping_list/models/item.dart';
 import 'package:shopping_list/models/urgency.dart';
 import 'package:shopping_list/provider/id_controller.dart';
@@ -43,7 +44,7 @@ class _ListScreenState extends State<ListScreen> {
                 icon: Icon(Icons.cancel),
                 onPressed: () async {
                   await LocalStorageRepository.clearListId();
-                  Get.offAll(HomeScreen());
+                  Get.offAll(() => HomeScreen());
                 },
               ),
             ),
@@ -70,12 +71,17 @@ class _ListScreenState extends State<ListScreen> {
                                   )),
                             ]),
                       ),
-                      Text(
-                        listId,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: ORANGE,
+                      GestureDetector(
+                        onTap: () async {
+                          await Share.share(listId);
+                        },
+                        child: Text(
+                          listId,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: ORANGE,
+                          ),
                         ),
                       ),
                     ],
@@ -87,9 +93,7 @@ class _ListScreenState extends State<ListScreen> {
                   ),
                   Expanded(
                     child: StreamBuilder<QuerySnapshot>(
-                      stream: Firestore.instance
-                          .collection("list/$listId/items")
-                          .snapshots(),
+                      stream: FirebaseFirestore.instance.collection("list/$listId/items").snapshots(),
                       builder: (_, snapshot) {
                         if (snapshot.hasError) {
                           return Text("Error");
@@ -103,7 +107,7 @@ class _ListScreenState extends State<ListScreen> {
                             ),
                           );
                         }
-                        final List<DocumentSnapshot> documents = snapshot.data.documents;
+                        final List<DocumentSnapshot> documents = snapshot.data.docs;
 
                         if (documents == null || documents.length == 0) {
                           return Center(
@@ -114,17 +118,16 @@ class _ListScreenState extends State<ListScreen> {
                           );
                         }
 
-                        final List<Item> items = documents.map(
-                            (DocumentSnapshot doc) => Item(
-                              id: doc.documentID,
-                              name: doc["name"],
-                              urgency: UrgencyExtension.fromLabel(doc["urgency"]),
-                              reference: doc.reference,
-                            )
-                        ).toList();
+                        final List<Item> items = documents
+                            .map((DocumentSnapshot doc) => Item(
+                                  id: doc.id,
+                                  name: doc["name"],
+                                  urgency: UrgencyExtension.fromLabel(doc["urgency"]),
+                                  reference: doc.reference,
+                                ))
+                            .toList();
 
-                        items.sort( (a,b) => b.urgency.priority.compareTo(a.urgency.priority));
-
+                        items.sort((a, b) => b.urgency.priority.compareTo(a.urgency.priority));
 
                         return ListView.builder(
                             itemBuilder: (_, index) {
@@ -150,23 +153,20 @@ class _ListScreenState extends State<ListScreen> {
                   Container(
                     width: SizeConfig.blockSizeHorizontal * 50,
                     height: 46,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      color: GOLD,
-                      child: Text(
-                        'add_new_item'.tr,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 3,
+                        backgroundColor: GOLD,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
                         ),
                       ),
+                      child: Text(
+                        'add_new_item'.tr,
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
                       onPressed: () {
-                        showDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (_) => ItemDialog(listId));
+                        showDialog(context: context, barrierDismissible: true, builder: (_) => ItemDialog(listId));
                       },
                     ),
                   ),

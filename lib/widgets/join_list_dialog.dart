@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:shopping_list/provider/id_controller.dart';
 import 'package:shopping_list/repository/firestore_repository.dart';
 import 'package:shopping_list/repository/local_storage_repository.dart';
-import 'package:shopping_list/screens/home_screen.dart';
 import 'package:shopping_list/screens/list_screen.dart';
 
 class JoinDialog extends StatelessWidget {
@@ -32,17 +31,24 @@ class JoinDialog extends StatelessWidget {
         ),
       ),
       actions: [
-        FlatButton(
+        TextButton(
           child: Text(
             "Cancel".tr,
-            style: TextStyle(color: Colors.red),
+            style: TextStyle(color: Colors.black),
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        RaisedButton(
-          color: Colors.green,
-          child: Text("Submit".tr),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          child: Text(
+            "Submit".tr,
+            style: TextStyle(color: Colors.white),
+          ),
           onPressed: () async {
             final String givenId = _idController.text;
 
