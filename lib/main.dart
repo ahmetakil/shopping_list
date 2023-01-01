@@ -1,15 +1,33 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:home_widget/home_widget.dart';
 import 'package:shopping_list/provider/id_controller.dart';
 import 'package:shopping_list/screens/settings_screen.dart';
 import 'package:shopping_list/screens/home_screen.dart';
 import 'package:shopping_list/util/styles.dart';
 import 'home_page.dart';
 
+// Called when Doing Background Work initiated from Widget
+Future<void> backgroundCallback(Uri uri) async {
+  print('backgroundCallback XXX B1 uri: $uri');
+  if (uri.host == 'updatecounter') {
+    print('backgroundCallback XXX B2 INSIDE');
+    int _counter;
+    await HomeWidget.getWidgetData<int>('_counter', defaultValue: 0).then((value) {
+      _counter = value;
+      _counter++;
+    });
+    await HomeWidget.saveWidgetData<int>('_counter', _counter);
+    await HomeWidget.updateWidget(name: 'ShoppingListWidget', iOSName: 'AppWidgetProvider');
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  HomeWidget.registerBackgroundCallback(backgroundCallback);
+
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
